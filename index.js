@@ -12,19 +12,61 @@ const fi = (function() {
       return collection;
     },
 
-    map: function() {
+    map: function(collection, callback) {
 
     },
 
-    reduce: function() {
+    reduce: function(collection, callback, acc) {
 
     },
 
-    functions: function() {
+    find: function(collection, predicate) {
 
     },
 
+    filter: function(collection, predicate) {
 
+    },
+
+    size: function(collection) {
+
+    },
+      // STOP --> Pair with Connie!!
+    first: function(array, [n]) {
+
+    },
+
+    last: function(array, [n]) {
+
+    },
+
+    compact: function(array) {
+
+    },
+
+    sortBy: function(array, callback) {
+
+    },
+
+    flatten: function(array, [shallow]) {
+
+    },
+
+    uniq: function(array, [isSorted], [callback]) {
+
+    },
+
+    keys: function(object) {
+
+    },
+
+    values: function(object) {
+
+    },
+
+    functions: function(object) {
+
+    }
   }
 })()
 
