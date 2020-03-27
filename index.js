@@ -5,16 +5,9 @@ const fi = (function() {
     },
 
     each: function(collection, callback) {
-      if (collection.isArray) {
-        let newCollection = collection;
-        for (const element of newCollection) {
-          callback(element);
-        }
-      } else {
-        let newCollection = collection;
-        for (const element in newCollection) {
-          callback(element);
-        }
+      let newCollection = collection.isArray ? collection.splice() : Object.values(collection);
+      for (let i = 0; i < newCollection.length; i++) {
+        callback(newCollection[i]);
       }
       return collection;
     },
