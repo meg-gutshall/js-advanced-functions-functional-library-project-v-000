@@ -22,41 +22,58 @@ const fi = (function() {
     },
 
     reduce: function(collection, callback, acc) {
-      let mutated = collection.splice();
-      let memo = acc || mutated[0];
-      !!acc ? null : mutated.shift();
-      for (const el of mutated) { memo = callback(el, memo) };
+      let memo = (!!acc) ? acc : collection[0];
+      let i = (!!acc) ? 0 : 1;
+      for (; i < collection.length; i++) {
+        memo = callback(memo, collection[i]);
+      }
       return memo;
-      // let memo = (!!acc) ? acc : collection[0];
-      // let i = (!!acc) ? 0 : 1;
-      // for (; i < collection.length; i++) {
-      //   memo = callback(collection[i], memo);
-      // }
-      // return memo;
     },
 
     find: function(collection, predicate) {
-
+      let mutated = collection.isArray ? collection.splice() : Object.values(collection);
+      for (let i = 0; i < mutated.length; i++) {
+        return predicate(mutated[i]) ? predicate(mutated[i]) : undefined;
+      }
     },
 
     filter: function(collection, predicate) {
-
+      let mutated = collection.isArray ? collection.splice() : Object.values(collection);
+      let newCollection = [];
+      for (let i = 0; i < mutated.length; i++) {
+        predicate(mutated[i]) !== false ? newCollection.push(predicate(mutated[i])) : null;
+      }
+      return newCollection;
     },
 
     size: function(collection) {
-
-    },
-      // STOP --> Pair with Connie!!
-    first: function(array, [n]) {
-
+      let mutated = collection.isArray ? collection.splice() : Object.values(collection);
+      return mutated.length;
     },
 
-    last: function(array, [n]) {
+    first: function(array, n) {
+      let mutated = array;
+      if (n !== undefined ) {
+        return mutated.slice(0, n);
+      } else {
+        return mutated.slice(0, 1).pop();
+      }
+    },
 
+    last: function(array, n) {
+      let mutated = array;
+      if (n !== undefined ) {
+        return mutated.slice(mutated.length - n, mutated.length);
+      } else {
+        return mutated.slice(mutated.length - 1, mutated.length).pop();
+      }
     },
 
     compact: function(array) {
-
+      let mutated = array;
+      let newArray = [];
+      for (const el of mutated) { el ? newArray.push(el) : null };
+      return newArray;
     },
 
     sortBy: function(array, callback) {
@@ -72,15 +89,19 @@ const fi = (function() {
     },
 
     keys: function(object) {
-
+      let mutated = Object.keys(object);
+      return mutated;
     },
 
     values: function(object) {
-
+      let mutated = Object.values(object);
+      return mutated;
     },
 
     functions: function(object) {
-
+      let mutated = Object.assign({}, object);
+      let newArray = [];
+      
     }
   }
 })()
